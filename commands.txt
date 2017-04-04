@@ -1,0 +1,13 @@
+
+ - Commands -                   				  -Functionality-
+  
+   \! cls							* clears screen
+
+  
+"Select * From customer         				* select all age's between the value of 20 34 and 40.
+Where ageim('20','34','40');"
+
+
+
+"Select * from customer						* selects all customer with name starting to "P". 
+where name like 'P%';"
