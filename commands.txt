@@ -1,13 +1,92 @@
 
- - Commands -                   				  -Functionality-
+ - Commands -                   				  -Functionality-								-Explaination-
   
-   \! cls							* clears screen
+   \! cls						* clears screen
 
   
-"Select * From customer         				* select all age's between the value of 20 34 and 40.
-Where ageim('20','34','40');"
+"Select * From customer         			* select all age's between the value of 20 34 and 40.                         "Select all from customer table where age is 24,34 and 40."
+Where age in('20','34','40');"
 
 
 
-"Select * from customer						* selects all customer with name starting to "P". 
+"Select * from customer				        * selects all customer with name starting to "P".                             "select all from customer table where name is started at "P"."
 where name like 'P%';"
+
+
+"SELECT count(*) from customer;"                        * count all the customer.						       "Count all(*) customer from customer table."
+
+
+
+"SELECT sum(salary) from customer;"			* add or sum all salary from the customer table.			       "Sum up salary column from table customer."
+
+
+"SELECT max(age) from customer;"			* select the min or max age from customer table.			       "Select the max age from customer or select the min age from customer"
+
+
+"SELECT min(age) from customer;"
+
+
+
+---- T I ME   S T A M P ------------		 					 
+"SELECT current_timestamp;"
+
+
+---- C H E C K I N G   C O N S T R A I N T S
+this is how you check for a column
+ 
+for example we will create a customer will only 18 years old above is allowed.
+and salary who is not null and not greater than 0.
+
+ CREATE TABLE customers(
+	customer_id integer NOT NULL,
+	customer_name char(25) NOT NULL,
+	age int CHECK(age>17) NOT NULL,
+	salary numeric NOT NULL CHECK(salary>0)
+ );
+
+------ U N I Q U E   C O N S T R A I N T S ------
+by adding 'UNIQUE' to a column it means that no data inputed on that column at the same value
+
+
+ CREATE TABLE customers(
+	customer_id integer NOT NULL UNIQUE,
+	customer_name char(25) NOT NULL,
+	age int CHECK(age>17) NOT NULL,
+	salary numeric NOT NULL CHECK(salary>0)
+ );
+
+
+------ P R I M A R Y   K E Y --------------
+What is a primary key?
+- A primary key is a special relational database table column (or combination of columns) designated to uniquely identify all table records. Remeber "UNIQUE IDENTIFIER FOR A TABLE RECORDS".
+
+ CREATE TABLE customers(
+	customer_id NOT NULL PRIMARY KEY,
+	customer_name char(25) NOT NULL,
+	age int CHECK(age>17) NOT NULL,
+	salary numeric NOT NULL CHECK(salary>0)
+ );
+
+Note: You can also have two primary keys :
+
+ CREATE TABLE customers(
+	customer_id NOT NULL,
+	customer_name char(25) NOT NULL,
+	age int CHECK(age>17) NOT NULL,
+	salary numeric NOT NULL CHECK(salary>0),
+	PRIMARY KEY(customer_id, customer_name)
+ );
+
+
+----- F O R E I G N  K E Y ---------
+you can make a foreign key constrains by addint "REFERENCE" and putting the reference column 
+
+
+ CREATE TABLE orders(
+	order_id int PRIMARY KEY NOT NULL,
+	product_id int REFERENCE products(product_id)
+ );
+
+
+
+for more info : https://www.postgresql.org/docs/8.2/static/ddl-constraints.html
